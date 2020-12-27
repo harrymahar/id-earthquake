@@ -22,13 +22,59 @@
         bottom: 0;
         width: 100%;
       }
+	  
+	  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+h2 {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #2dc4b2;
+}
+
+#console {
+  position: absolute;
+  width: 240px;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: white;
+}
     </style>
 
   </head>
   <body>
+	
 
+	
+	
     <!-- Add a #map element to the page, to serve as the map's container -->
     <div id='map'></div>
+		<div id='console'>
+  <h1>Indonesia Earthquake Events 2020</h1>
+  <p>Earthquake Events</a> in Indonesia, 2020</p>
+	</div>
+	
+		
 
     <script>
 
@@ -40,7 +86,7 @@
     const map = new mapboxgl.Map({
       style: 'mapbox://styles/harrymahar/ckj6ivvp3eiya19qk7bsnwk5u', //TODO replace this with YOUR style URL! This tells the map which style to use
       container: 'map', // id of the container div we created above
-      center: [117.733,-0.776], // the location to display when the map first loads
+      center: [117.733,1.5], // the location to display when the map first loads
       zoom: 4.5 // the zoom level to display when the map first loads
     });
 	
