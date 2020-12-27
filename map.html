@@ -96,6 +96,11 @@ a {
     <div class='label'>6+</div>
   </div>
 </div>
+
+<div class='session' id='sliderbar'>
+  <h2>Month: <label id='month'>January</label></h2>
+  <input id='slider' class='row' type='range' min='January' max='December' step='1' value='January' />
+</div>
 </div>
 		
 
@@ -147,9 +152,23 @@ a {
       ],
       'circle-opacity': 0.8
     }
+	 
   });
+  
+  document.getElementById('slider').addEventListener('input', function(e) {
+  var month = parseInt(e.target.value);
+  
+  // update the map
+  map.setFilter('collisions', ['==', ['string', ['get', 'waktu']], month]);
+
+
+  // update text in the UI
+  document.getElementById('waktu').textContent = months[month];
 });
 
+  
+ 
+});
 	map.addControl(new mapboxgl.NavigationControl());
 
     </script>
