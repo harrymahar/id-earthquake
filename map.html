@@ -10,20 +10,11 @@
 
     <!-- Add some default styling for the map container & controls -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+   
+   <style>
 
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
 	  
-	  body {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
@@ -54,26 +45,58 @@ a {
 
 #console {
   position: absolute;
-  width: 240px;
+  width: 360px;
   margin: 10px;
   padding: 10px 20px;
   background-color: white;
 }
-    </style>
+
+.session {
+  margin-bottom: 20px;
+}
+
+.row {
+  height: 12px;
+  width: 100%;
+}
+
+.colors {
+  background: linear-gradient(to right, #2b83ba, #abdda4, #ffffbf, #fdae61, #d7191c);
+  margin-bottom: 5px;
+}
+
+.label {
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+}
+
+</style>
 
   </head>
   <body>
 	
-
-	
-	
     <!-- Add a #map element to the page, to serve as the map's container -->
     <div id='map'></div>
+	
 	<div id='console'>
   <h1>Indonesia Earthquake Events 2020</h1>
   <p>Earthquake Events</a> in Indonesia, 2020</p>
-	</div>
 	
+	
+<div class='session'>
+  <h2>Magnitude</h2>
+  <div class='row colors'>
+  </div>
+  <div class='row labels'>
+    <div class='label'>2</div>
+    <div class='label'>3</div>
+    <div class='label'>4</div>
+    <div class='label'>5</div>
+    <div class='label'>6+</div>
+  </div>
+</div>
+</div>
 		
 
     <script>
@@ -87,13 +110,47 @@ a {
       style: 'mapbox://styles/harrymahar/ckj6ivvp3eiya19qk7bsnwk5u', //TODO replace this with YOUR style URL! This tells the map which style to use
       container: 'map', // id of the container div we created above
       center: [117.733,1.5], // the location to display when the map first loads
-      zoom: 4.5 // the zoom level to display when the map first loads
+      zoom: 4.3, // the zoom level to display when the map first loads
+	  pitch: 28.5
     });
 	
 	
 
-    // Part 4 code will go here
+    // Earthquake data
 	
+	map.on('load', function() {
+  map.addLayer({
+    id: 'collisions',
+    type: 'circle',
+    source: {
+      type: 'geojson',
+      data: 'https://harrymahar.github.io/id-earthquake/gb_2020.geojson' // replace this with the url of your own geojson
+    },
+    paint: {
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['number', ['get', 'mag']],
+        3.9, 4,
+        6.9, 24
+      ],
+      'circle-color': [
+        'interpolate',
+        ['linear'],
+        ['number', ['get', 'mag']],
+        2, '#2b83ba',
+        3, '#2b83ba',
+        4, '#abdda4',
+        5, '#ffffbf',
+        6, '#fdae61',
+        7, '#d7191c'
+      ],
+      'circle-opacity': 0.8
+    }
+  });
+});
+
+	map.addControl(new mapboxgl.NavigationControl());
 
     </script>
   </body>
