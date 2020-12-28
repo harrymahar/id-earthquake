@@ -25,7 +25,6 @@ body {
     height: 100vh;
     width:100vw;
     position: fixed;
-    z-index: -5;
 }
 
 h1 {
@@ -182,6 +181,39 @@ a {
     }
 	 
   });
+  
+  map.on('click', (event) => {
+  const clickedPoint = [event.lngLat.lng, event.lngLat.lat];
+
+
+  const location = {
+    center: clickedPoint,
+    zoom: map.getZoom(),
+    pitch: map.getPitch(),
+    bearing: map.getBearing(),
+  };
+
+  map.flyTo(location);
+
+  const clicked = {
+    location: location
+  };
+
+  const clickedFeatures = map.queryRenderedFeatures(event.point, { data: 'https://harrymahar.github.io/id-earthquake/gb_2020.geojson'});
+
+  if (clickedFeatures.length > 0) {
+    clicked.title = clickedFeatures[0].properties.mag;
+	clicked.typemag = clickedFeatures[0].properties.magtype; 
+    clicked.description = clickedFeatures[0].properties.place;
+	
+	const popup = new mapboxgl.Popup() // create the popup
+          .setLngLat(clicked.location.center) // position it at the clicked point
+          .setHTML('<h2>' +'Magnitude:' + clicked.title + clicked.typemag + '</h2><p1>' +'Location:'+ clicked.description + '</p1>') // add some HTML content
+          .addTo(map); // place the popup on the map
+  }
+
+  console.log(JSON.stringify(clicked, null, 2));
+});
   
   document.getElementById('filters').addEventListener('change', function(e) {
   var month = e.target.value;
