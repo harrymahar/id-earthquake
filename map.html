@@ -29,7 +29,7 @@ body {
 
 h1 {
   font-size: 20px;
-  line-height: 30px;
+  line-height: 1px;
 }
 
 h2 {
@@ -46,8 +46,8 @@ a {
 #console {
   position: absolute;
   width: 360px;
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 5px;
+  padding: 50px 10px;
   background-color: white;
 }
 
@@ -56,7 +56,7 @@ a {
 }
 
 .row {
-  height: 12px;
+  height: 10px;
   width: 100%;
 }
 
@@ -96,11 +96,38 @@ a {
     <div class='label'>6+</div>
   </div>
 </div>
-
-<div class='session' id='sliderbar'>
-  <h2>Month: <label id='month'>January</label></h2>
-  <input id='slider' class='row' type='range' min='January' max='December' step='1' value='January' />
+<div class='session'>
+  <h2>Month of the year<h2>
+  <div class='row' id='filters'>
+    <input id='all' type='radio' name='toggle' value='all' checked='checked'>
+    <label for='all'>All</label>
+    <input id='january' type='radio' name='toggle' value='january'>
+    <label for='january'>January</label>
+    <input id='february' type='radio' name='toggle' value='february'>
+    <label for='february'>February</label>
+	<input id='march' type='radio' name='toggle' value='march'>
+    <label for='march'>March</label>
+	<input id='april' type='radio' name='toggle' value='april'>
+    <label for='april'>April</label>
+	<input id='may' type='radio' name='toggle' value='may'>
+    <label for='may'>May</label>
+	<input id='june' type='radio' name='toggle' value='june'>
+    <label for='june'>June</label>
+	<input id='july' type='radio' name='toggle' value='july'>
+    <label for='july'>July</label>
+	<input id='august' type='radio' name='toggle' value='august'>
+    <label for='august'>August</label>
+	<input id='september' type='radio' name='toggle' value='september'>
+    <label for='september'>September</label>
+	<input id='october' type='radio' name='toggle' value='october'>
+    <label for='october'>October</label>
+	<input id='november' type='radio' name='toggle' value='november'>
+    <label for='november'>November</label>
+	<input id='december' type='radio' name='toggle' value='december'>
+    <label for='december'>December</label>
+  </div>
 </div>
+
 </div>
 		
 
@@ -114,8 +141,8 @@ a {
     const map = new mapboxgl.Map({
       style: 'mapbox://styles/harrymahar/ckj6ivvp3eiya19qk7bsnwk5u', //TODO replace this with YOUR style URL! This tells the map which style to use
       container: 'map', // id of the container div we created above
-      center: [117.733,1.5], // the location to display when the map first loads
-      zoom: 4.3, // the zoom level to display when the map first loads
+      center: [117.733,3.8], // the location to display when the map first loads
+      zoom: 4, // the zoom level to display when the map first loads
 	  pitch: 28.5
     });
 	
@@ -154,20 +181,7 @@ a {
     }
 	 
   });
-  
-  document.getElementById('slider').addEventListener('input', function(e) {
-  var month = parseInt(e.target.value);
-  
-  // update the map
-  map.setFilter('collisions', ['==', ['string', ['get', 'waktu']], month]);
-
-
-  // update text in the UI
-  document.getElementById('waktu').textContent = months[month];
-});
-
-  
- 
+   
 });
 	map.addControl(new mapboxgl.NavigationControl());
 
