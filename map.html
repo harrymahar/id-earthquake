@@ -203,12 +203,14 @@ a {
 
   if (clickedFeatures.length > 0) {
     clicked.title = clickedFeatures[0].properties.mag;
-	clicked.typemag = clickedFeatures[0].properties.magtype; 
+	clicked.type = clickedFeatures[0].properties.magType; 
     clicked.description = clickedFeatures[0].properties.place;
+	clicked.depth = clickedFeatures[0].properties.depth;
+	clicked.time = clickedFeatures[0].properties.time;
 	
 	const popup = new mapboxgl.Popup() // create the popup
           .setLngLat(clicked.location.center) // position it at the clicked point
-          .setHTML('<h2>' +'Magnitude:' + clicked.title + clicked.typemag + '</h2><p1>' +'Location:'+ clicked.description + '</p1>') // add some HTML content
+          .setHTML('<h1>' +'Magnitude: ' + clicked.title + ' ' + clicked.type + '</h1><p1>' +'Location:  '+ clicked.description + '</p1><br><p2>'+ 'Depth:  '+ clicked.depth + ' km'+ '</p2><br><p3>'+'Event time: ' + clicked.time + '</p3>') // add some HTML content
           .addTo(map); // place the popup on the map
   }
 
