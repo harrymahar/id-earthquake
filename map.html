@@ -181,6 +181,45 @@ a {
     }
 	 
   });
+  
+  document.getElementById('filters').addEventListener('change', function(e) {
+  var month = e.target.value;
+  // update the map filter
+  if (month === 'all') {
+   filterMonth = ['!=', ['string', ['get', 'waktu']], 'placeholder'];
+  } else if (month === 'all') {
+  filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
+  } else if (month ===  'january') {
+    filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
+  } else if (month ===  'february') {
+	filterMonth = ['match', ['get', 'waktu'], ['February'], true, false];
+  } else if (month ===  'march') {
+  filterMonth = ['match', ['get', 'waktu'], ['March'], true, false];
+  } else if (month ===  'april') {
+  filterMonth = ['match', ['get', 'waktu'], ['April'], true, false];
+  } else if (month ===  'may') {
+  filterMonth = ['match', ['get', 'waktu'], ['May'], true, false];
+  } else if (month ===  'june') {
+  filterMonth = ['match', ['get', 'waktu'], ['June'], true, false];
+  } else if (month ===  'july') {
+  filterMonth = ['match', ['get', 'waktu'], ['July'], true, false];
+  } else if (month ===  'august') {
+  filterMonth = ['match', ['get', 'waktu'], ['August'], true, false];
+  } else if (month ===  'september') {
+  filterMonth = ['match', ['get', 'waktu'], ['September'], true, false];
+  } else if (month ===  'october') {
+  filterMonth = ['match', ['get', 'waktu'], ['October'], true, false];
+  } else if (month ===  'november') {
+  filterMonth = ['match', ['get', 'waktu'], ['November'], true, false];
+  } else if (month ===  'december') {
+  filterMonth = ['match', ['get', 'waktu'], ['December'], true, false];
+  } else  {
+  
+    console.log('error');
+  }
+  
+  map.setFilter('collisions', ['all', filterMonth]);
+});
    
 });
 	map.addControl(new mapboxgl.NavigationControl());
