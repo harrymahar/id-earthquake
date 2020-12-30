@@ -214,11 +214,11 @@ a {
   var magnitude = e.target.value;
   // update the map filter
   if (magnitude === 'all') {
-   filterMagnitude = ['!=', ['string', ['get', 'magnitude']], "placeholder"];
+   filterMagnitude = ['!=', ['string', ['get', 'magnitude']], 'placeholder'];
   } else if (magnitude === 'all') {
-  filterMagnitude = ['match', ['get', 'magnitude'], ["4"],true,false];
+  filterMagnitude = ['match', ['get', 'magnitude'], ['4' ],true,false];
   } else if (magnitude ===  '3') {
-  filterMagnitude = ['match', ['get', 'magnitude'], ["4"], true, false];
+  filterMagnitude = ['match', ['get', 'magnitude'], ['4'], true, false];
   } else  {
 
  
@@ -227,9 +227,6 @@ a {
   
   map.setFilter('collisions', ['all', filterMagnitude]);
 });
-   
-   
-   
    
    
    
