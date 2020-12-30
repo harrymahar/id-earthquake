@@ -30,6 +30,8 @@ body {
 h1 {
   font-size: 20px;
   line-height: 1px;
+  text-align: center;
+  line-height: 100%;
 }
 
 h2 {
@@ -45,10 +47,13 @@ a {
 
 #console {
   position: fixed;
+  bottom: 50;
+  right: 0;
   width: 360px;
   margin: 5px;
-  padding: 50px 10px;
-  background-color: white;
+  padding: 50px 1px;
+  background-color: #DDDBD7;
+  border: 5px solid black;
 }
 
 .session {
@@ -84,7 +89,7 @@ a {
 	
 	
 <div class='session'>
-  <h2>Magnitude</h2>
+  <h2>Magnitude Scale</h2>
   <div class='row colors'>
   </div>
   <div class='row labels'>
@@ -97,22 +102,51 @@ a {
 </div>
 
 <div class='session'>
-  <h2>Magnitude<h2>
   <div class='row' id='filters'>
     <input id='all' type='radio' name='toggle' value='all' checked='checked'>
     <label for='all'>All</label>
-    <input id='3' type='radio' name='toggle' value='3'>
-    <label for='3'>3</label>
-    <input id='4' type='radio' name='toggle' value='4'>
-    <label for='4'>4</label>
-	<input id='5' type='radio' name='toggle' value='5'>
-    <label for='5'>5</label>
-	<input id='6' type='radio' name='toggle' value='6'>
-    <label for='6'>6+</label>
+    <input id='three' type='radio' name='toggle' value='three'>
+    <label for='three'>3</label>
+    <input id='four' type='radio' name='toggle' value='four'>
+    <label for='four'>4</label>
+	<input id='five' type='radio' name='toggle' value='five'>
+    <label for='five'>5</label>
+	<input id='six' type='radio' name='toggle' value='six'>
+    <label for='six'>6+</label>
   </div>
 </div>
 
-
+<div class='session'>
+  <h2>Month of the year<h2>
+  <div class='row' id='filters1'>
+    <input id='all' type='radio' name='toggle' value='all' checked='checked'>
+    <label for='all'>All</label>
+    <input id='january' type='radio' name='toggle' value='january'>
+    <label for='january'>January</label>
+    <input id='february' type='radio' name='toggle' value='february'>
+    <label for='february'>February</label>
+	<input id='march' type='radio' name='toggle' value='march'>
+    <label for='march'>March</label>
+	<input id='april' type='radio' name='toggle' value='april'>
+    <label for='april'>April</label>
+	<input id='may' type='radio' name='toggle' value='may'>
+    <label for='may'>May</label>
+	<input id='june' type='radio' name='toggle' value='june'>
+    <label for='june'>June</label>
+	<input id='july' type='radio' name='toggle' value='july'>
+    <label for='july'>July</label>
+	<input id='august' type='radio' name='toggle' value='august'>
+    <label for='august'>August</label>
+	<input id='september' type='radio' name='toggle' value='september'>
+    <label for='september'>September</label>
+	<input id='october' type='radio' name='toggle' value='october'>
+    <label for='october'>October</label>
+	<input id='november' type='radio' name='toggle' value='november'>
+    <label for='november'>November</label>
+	<input id='december' type='radio' name='toggle' value='december'>
+    <label for='december'>December</label>
+  </div>
+</div>
 
 
 
@@ -130,8 +164,8 @@ a {
     const map = new mapboxgl.Map({
       style: 'mapbox://styles/harrymahar/ckj6ivvp3eiya19qk7bsnwk5u', //TODO replace this with YOUR style URL! This tells the map which style to use
       container: 'map', // id of the container div we created above
-      center: [117.733,3.8], // the location to display when the map first loads
-      zoom: 4, // the zoom level to display when the map first loads
+      center: [120.733,1.0], // the location to display when the map first loads
+      zoom: 4.3, // the zoom level to display when the map first loads
 	  pitch: 28.5
     });
 	
@@ -216,9 +250,15 @@ a {
   if (magnitude === 'all') {
    filterMagnitude = ['!=', ['string', ['get', 'magnitude']], 'placeholder'];
   } else if (magnitude === 'all') {
-  filterMagnitude = ['match', ['get', 'magnitude'], ['4' ],true,false];
-  } else if (magnitude ===  '3') {
-  filterMagnitude = ['match', ['get', 'magnitude'], ['4'], true, false];
+  filterMagnitude = ['match', ['get', 'magnitude'], ['3.8','3.9'],true,false];
+  } else if (magnitude ===  'three') {
+  filterMagnitude = ['match', ['get', 'magnitude'], ['3.8','3.9'], true, false];
+  } else if (magnitude ===  'four') {
+  filterMagnitude = ['match', ['get', 'magnitude'], ['4','4.1','4.2','4.3','4.4','4.5','4.6','4.7','4.8','4.9'], true, false];
+  } else if (magnitude ===  'five') {
+  filterMagnitude = ['match', ['get', 'magnitude'], ['5','5.1','5.2','5.3','5.4','5.5','5.6','5.7','5.8','5.9'], true, false];
+  } else if (magnitude ===  'six') {
+  filterMagnitude = ['match', ['get', 'magnitude'], ['6','6.1','6.2','6.3','6.4','6.6','6.8','6.9'], true, false];
   } else  {
 
  
@@ -228,10 +268,52 @@ a {
   map.setFilter('collisions', ['all', filterMagnitude]);
 });
    
-   
+ document.getElementById('filters1').addEventListener('change', function(e) {
+  var month = e.target.value;
+  // update the map filter
+  if (month === 'all') {
+   filterMonth = ['!=', ['string', ['get', 'waktu']], 'placeholder'];
+  } else if (month === 'all') {
+  filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
+  } else if (month ===  'january') {
+    filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
+  } else if (month ===  'february') {
+	filterMonth = ['match', ['get', 'waktu'], ['February'], true, false];
+  } else if (month ===  'march') {
+  filterMonth = ['match', ['get', 'waktu'], ['March'], true, false];
+  } else if (month ===  'april') {
+  filterMonth = ['match', ['get', 'waktu'], ['April'], true, false];
+  } else if (month ===  'may') {
+  filterMonth = ['match', ['get', 'waktu'], ['May'], true, false];
+  } else if (month ===  'june') {
+  filterMonth = ['match', ['get', 'waktu'], ['June'], true, false];
+  } else if (month ===  'july') {
+  filterMonth = ['match', ['get', 'waktu'], ['July'], true, false];
+  } else if (month ===  'august') {
+  filterMonth = ['match', ['get', 'waktu'], ['August'], true, false];
+  } else if (month ===  'september') {
+  filterMonth = ['match', ['get', 'waktu'], ['September'], true, false];
+  } else if (month ===  'october') {
+  filterMonth = ['match', ['get', 'waktu'], ['October'], true, false];
+  } else if (month ===  'november') {
+  filterMonth = ['match', ['get', 'waktu'], ['November'], true, false];
+  } else if (month ===  'december') {
+  filterMonth = ['match', ['get', 'waktu'], ['December'], true, false];
+  } else  {
+  
+    console.log('error');
+  }
+  
+  map.setFilter('collisions', ['all', filterMonth]);
+});  
    
 });
-	map.addControl(new mapboxgl.NavigationControl());
+
+
+	
+	var nav = new mapboxgl.NavigationControl();
+	map.addControl(nav, 'top-left');
+	
 
     </script>
   </body>
