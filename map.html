@@ -81,7 +81,6 @@ a {
 	
 	<div id='console'>
   <h1>Indonesia Earthquake Events 2020</h1>
-  <p>Earthquake Events</a> in Indonesia, 2020</p>
 	
 	
 <div class='session'>
@@ -96,37 +95,27 @@ a {
     <div class='label'>6+</div>
   </div>
 </div>
+
 <div class='session'>
-  <h2>Month of the year<h2>
-  <div class='row' id='filters'>
+  <h2>Magnitude<h2>
+  <div class='row' id='filters1'>
     <input id='all' type='radio' name='toggle' value='all' checked='checked'>
     <label for='all'>All</label>
-    <input id='january' type='radio' name='toggle' value='january'>
-    <label for='january'>January</label>
-    <input id='february' type='radio' name='toggle' value='february'>
-    <label for='february'>February</label>
-	<input id='march' type='radio' name='toggle' value='march'>
-    <label for='march'>March</label>
-	<input id='april' type='radio' name='toggle' value='april'>
-    <label for='april'>April</label>
-	<input id='may' type='radio' name='toggle' value='may'>
-    <label for='may'>May</label>
-	<input id='june' type='radio' name='toggle' value='june'>
-    <label for='june'>June</label>
-	<input id='july' type='radio' name='toggle' value='july'>
-    <label for='july'>July</label>
-	<input id='august' type='radio' name='toggle' value='august'>
-    <label for='august'>August</label>
-	<input id='september' type='radio' name='toggle' value='september'>
-    <label for='september'>September</label>
-	<input id='october' type='radio' name='toggle' value='october'>
-    <label for='october'>October</label>
-	<input id='november' type='radio' name='toggle' value='november'>
-    <label for='november'>November</label>
-	<input id='december' type='radio' name='toggle' value='december'>
-    <label for='december'>December</label>
+    <input id='3' type='radio' name='toggle' value='3'>
+    <label for='3'>3</label>
+    <input id='4' type='radio' name='toggle' value='4'>
+    <label for='4'>4</label>
+	<input id='5' type='radio' name='toggle' value='5'>
+    <label for='5'>5</label>
+	<input id='6' type='radio' name='toggle' value='6'>
+    <label for='6'>6+</label>
   </div>
 </div>
+
+
+
+
+
 
 </div>
 		
@@ -216,45 +205,33 @@ a {
 
   console.log(JSON.stringify(clicked, null, 2));
 });
+
+
   
-  document.getElementById('filters').addEventListener('change', function(e) {
-  var month = e.target.value;
+
+   
+     document.getElementById('filters1').addEventListener('change', function(e) {
+  var magnitude = e.target.value;
   // update the map filter
-  if (month === 'all') {
-   filterMonth = ['!=', ['string', ['get', 'waktu']], 'placeholder'];
-  } else if (month === 'all') {
-  filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
-  } else if (month ===  'january') {
-    filterMonth = ['match', ['get', 'waktu'], ['January'], true, false];
-  } else if (month ===  'february') {
-	filterMonth = ['match', ['get', 'waktu'], ['February'], true, false];
-  } else if (month ===  'march') {
-  filterMonth = ['match', ['get', 'waktu'], ['March'], true, false];
-  } else if (month ===  'april') {
-  filterMonth = ['match', ['get', 'waktu'], ['April'], true, false];
-  } else if (month ===  'may') {
-  filterMonth = ['match', ['get', 'waktu'], ['May'], true, false];
-  } else if (month ===  'june') {
-  filterMonth = ['match', ['get', 'waktu'], ['June'], true, false];
-  } else if (month ===  'july') {
-  filterMonth = ['match', ['get', 'waktu'], ['July'], true, false];
-  } else if (month ===  'august') {
-  filterMonth = ['match', ['get', 'waktu'], ['August'], true, false];
-  } else if (month ===  'september') {
-  filterMonth = ['match', ['get', 'waktu'], ['September'], true, false];
-  } else if (month ===  'october') {
-  filterMonth = ['match', ['get', 'waktu'], ['October'], true, false];
-  } else if (month ===  'november') {
-  filterMonth = ['match', ['get', 'waktu'], ['November'], true, false];
-  } else if (month ===  'december') {
-  filterMonth = ['match', ['get', 'waktu'], ['December'], true, false];
+  if (magnitude === 'all') {
+   filterMagnitude = ['!=', ['number', ['get', 'mag']], "placeholder"];
+  } else if (magnitude === 'all') {
+  filterMagnitude = ['match', ['get', 'mag'], ["3.9"],true,false];
+  } else if (magnitude ===  '3') {
+  filterMagnitude = ['match', ['get', 'mag'], ["3.9"], true, false];
   } else  {
-  
+
+ 
     console.log('error');
   }
   
-  map.setFilter('collisions', ['all', filterMonth]);
+  map.setFilter('collisions', ['all', filterMagnitude]);
 });
+   
+   
+   
+   
+   
    
 });
 	map.addControl(new mapboxgl.NavigationControl());
