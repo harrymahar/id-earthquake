@@ -98,7 +98,7 @@ a {
 
 <div class='session'>
   <h2>Magnitude<h2>
-  <div class='row' id='filters1'>
+  <div class='row' id='filters'>
     <input id='all' type='radio' name='toggle' value='all' checked='checked'>
     <label for='all'>All</label>
     <input id='3' type='radio' name='toggle' value='3'>
@@ -210,15 +210,15 @@ a {
   
 
    
-     document.getElementById('filters1').addEventListener('change', function(e) {
+     document.getElementById('filters').addEventListener('change', function(e) {
   var magnitude = e.target.value;
   // update the map filter
   if (magnitude === 'all') {
-   filterMagnitude = ['!=', ['number', ['get', 'mag']], "placeholder"];
+   filterMagnitude = ['!=', ['string', ['get', 'magnitude']], "placeholder"];
   } else if (magnitude === 'all') {
-  filterMagnitude = ['match', ['get', 'mag'], ["3.9"],true,false];
+  filterMagnitude = ['match', ['get', 'magnitude'], ["4"],true,false];
   } else if (magnitude ===  '3') {
-  filterMagnitude = ['match', ['get', 'mag'], ["3.9"], true, false];
+  filterMagnitude = ['match', ['get', 'magnitude'], ["4"], true, false];
   } else  {
 
  
